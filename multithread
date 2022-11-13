@@ -1,0 +1,58 @@
+import threading
+from time import sleep
+
+
+
+
+def primeira_tarefa(): #simulação do mapeamento direto 
+    x = 0 
+    while x < 10:
+        print('tarefa_1')
+        sleep(1)
+        x+=1
+
+
+def segunda_tarefa(): #simulação mapeamento totalmente associativo 
+    x = 0 
+    while x < 10:
+        print('tarefa_2')
+        sleep(1)
+        x+=1
+
+def terceira_tarefa(): #simulação mapeamento de associativo 2 vias
+
+    x = 0 
+    while x < 10:
+        print('tarefa_3')
+        sleep(1)
+        x+=1
+
+def quarta_tarefa(): #simulação mapeamento de associativo 4 vias
+    x = 0 
+    while x < 10:
+        print('tarefa_4')
+        sleep(1)
+        x+=1
+
+
+#Consideramos a main() o código abaixo
+def main():
+
+    thread1 = threading.Thread(target = primeira_tarefa)
+    thread1.start()
+    thread2 = threading.Thread(target = segunda_tarefa)
+    thread2.start()
+    thread3 = threading.Thread(target = terceira_tarefa)
+    thread3.start()
+    thread4 = threading.Thread(target = quarta_tarefa)
+    thread4.start()
+# OS RESULTADOS SERIAM EXIBIDOS APÓS A CONCLUSÃO DAS 4 Threads 
+
+    thread1.join()
+    thread2.join()
+    thread3.join()
+    thread4.join()
+
+    print('O processo encerrou os resultados são : ')
+
+main()
