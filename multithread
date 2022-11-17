@@ -1,39 +1,29 @@
 import threading
 from time import sleep
-
+import os
 
 
 
 def primeira_tarefa(): #simulação do mapeamento direto 
-    x = 0 
-    while x < 10:
-        print('tarefa_1')
-        sleep(1)
-        x+=1
-
+    os.system(f'''cache-simulator --cache-size 64 --num-blocks-per-set 1 --num-words-per-block 4 --word-addrs 3 180 43 2 191 88 190 14 181 44 186 253''')
 
 def segunda_tarefa(): #simulação mapeamento totalmente associativo 
-    x = 0 
-    while x < 10:
-        print('tarefa_2')
-        sleep(1)
-        x+=1
+    os.system('cache-simulator --cache-size 64 --num-blocks-per-set 4 --num-words-per-block 4 --word-addrs 0 8 0 6 8')
 
-def terceira_tarefa(): #simulação mapeamento de associativo 2 vias
+def terceira_tarefa(): #simulação com mapeamento associativo de 2 vias
 
-    x = 0 
-    while x < 10:
-        print('tarefa_3')
-        sleep(1)
-        x+=1
+    os.system('cache-simulator --cache-size 4 --num-blocks-per-set 2 --num-words-per-block 1 --word-addrs 0 8 0 6 8')
 
-def quarta_tarefa(): #simulação mapeamento de associativo 4 vias
-    x = 0 
-    while x < 10:
-        print('tarefa_4')
-        sleep(1)
-        x+=1
+def quarta_tarefa(): #simulação com mapeamento associativo de 4 vias
 
+    os.system('cache-simulator --cache-size 64 --num-blocks-per-set 4 --num-words-per-block 1 --word-addrs 0 8 0 6 8')
+
+def quinta_tarefa(): # simulação com mapeamento assosiativo de 8 vias
+
+    os.system('cache-simulator --cache-size 64 --num-blocks-per-set 8 --num-words-per-block 1 --word-addrs 0 8 0 6 8')
+
+def sexta_tarefa(): # simulação com mapeamento assosiativo de 16 vias
+    os.system('cache-simulator --cache-size 64 --num-blocks-per-set 16 --num-words-per-block 1 --word-addrs 0 8 0 6 8')
 
 #Consideramos a main() o código abaixo
 def main():
@@ -46,13 +36,18 @@ def main():
     thread3.start()
     thread4 = threading.Thread(target = quarta_tarefa)
     thread4.start()
+    thread5 = threading.Thread(target = quinta_tarefa)
+    thread5.start()
+    thread6 = threading.Thread(target = sexta_tarefa)
+    thread6.start()
 # OS RESULTADOS SERIAM EXIBIDOS APÓS A CONCLUSÃO DAS 4 Threads 
 
     thread1.join()
     thread2.join()
     thread3.join()
     thread4.join()
-
-    print('O processo encerrou os resultados são : ')
+    thread5.join()
+    thread6.join()
+    print('terminou ')
 
 main()
